@@ -6,7 +6,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ProductCard } from '@/components/products/ProductCard';
-import { products } from '@/data/products';
+import { products, formatPrice } from '@/data/products';
 import { useStore } from '@/contexts/StoreContext';
 import { toast } from '@/hooks/use-toast';
 
@@ -140,11 +140,11 @@ const ProductDetail = () => {
             {/* Price */}
             <div className="mt-6 flex items-center gap-4">
               <span className="font-display text-4xl text-primary">
-                ${product.price.toFixed(2)}
+                {formatPrice(product.price)}
               </span>
               {product.originalPrice && (
                 <span className="text-xl text-muted-foreground line-through">
-                  ${product.originalPrice.toFixed(2)}
+                  {formatPrice(product.originalPrice)}
                 </span>
               )}
               {product.originalPrice && (
@@ -208,7 +208,7 @@ const ProductDetail = () => {
                 </div>
                 <div>
                   <p className="text-sm font-medium">Free Shipping</p>
-                  <p className="text-xs text-muted-foreground">Orders over $50</p>
+                  <p className="text-xs text-muted-foreground">Orders over ₹2,000</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
