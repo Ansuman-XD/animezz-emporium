@@ -5,6 +5,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { useStore } from '@/contexts/StoreContext';
 import { toast } from '@/hooks/use-toast';
+import { formatPrice } from '@/data/products';
 
 const Wishlist = () => {
   const { wishlist, removeFromWishlist, addToCart } = useStore();
@@ -87,7 +88,7 @@ const Wishlist = () => {
                   </h3>
                 </Link>
                 <p className="mt-2 text-lg font-bold text-primary">
-                  ${item.price.toFixed(2)}
+                  {formatPrice(item.price)}
                 </p>
                 <div className="mt-4 flex gap-2">
                   <Button

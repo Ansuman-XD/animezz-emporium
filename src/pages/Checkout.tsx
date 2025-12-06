@@ -7,13 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useStore } from '@/contexts/StoreContext';
 import { toast } from '@/hooks/use-toast';
+import { formatPrice } from '@/data/products';
 
 const Checkout = () => {
   const { cart, cartTotal, clearCart } = useStore();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const shipping = cartTotal >= 50 ? 0 : 5.99;
+  const shipping = cartTotal >= 2000 ? 0 : 199;
   const total = cartTotal + shipping;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -184,7 +185,7 @@ const Checkout = () => {
                         <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
                       </div>
                       <p className="font-medium">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        {formatPrice(item.price * item.quantity)}
                       </p>
                     </div>
                   ))}
@@ -193,7 +194,7 @@ const Checkout = () => {
                 <div className="mt-6 space-y-3 border-t border-border pt-6">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span>${cartTotal.toFixed(2)}</span>
+                    <span>{formatPrice(cartTotal)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Shipping</span>
@@ -201,13 +202,13 @@ const Checkout = () => {
                       {shipping === 0 ? (
                         <span className="text-green-500">Free</span>
                       ) : (
-                        `$${shipping.toFixed(2)}`
+                        formatPrice(shipping)
                       )}
                     </span>
                   </div>
                   <div className="flex justify-between border-t border-border pt-3 font-semibold">
                     <span>Total</span>
-                    <span className="text-primary text-xl">${total.toFixed(2)}</span>
+                    <span className="text-primary text-xl">{formatPrice(total)}</span>
                   </div>
                 </div>
 
@@ -218,7 +219,7 @@ const Checkout = () => {
                   className="mt-6 w-full"
                   disabled={isProcessing}
                 >
-                  {isProcessing ? 'Processing...' : `Pay $${total.toFixed(2)}`}
+                  {isProcessing ? 'Processing...' : `Pay ${formatPrice(total)}`}
                 </Button>
               </motion.div>
             </div>

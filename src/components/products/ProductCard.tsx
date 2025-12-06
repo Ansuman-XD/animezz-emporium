@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Product } from '@/data/products';
+import { Product, formatPrice } from '@/data/products';
 import { useStore } from '@/contexts/StoreContext';
 import { toast } from '@/hooks/use-toast';
 
@@ -111,11 +111,11 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             {/* Price */}
             <div className="mt-2 flex items-center gap-2">
               <span className="text-lg font-bold text-primary">
-                ${product.price.toFixed(2)}
+                {formatPrice(product.price)}
               </span>
               {product.originalPrice && (
                 <span className="text-sm text-muted-foreground line-through">
-                  ${product.originalPrice.toFixed(2)}
+                  {formatPrice(product.originalPrice)}
                 </span>
               )}
             </div>

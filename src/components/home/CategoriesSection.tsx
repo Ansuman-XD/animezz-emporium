@@ -24,9 +24,19 @@ export function CategoriesSection() {
               transition={{ delay: index * 0.1 }}
             >
               <Link to={`/products?category=${category.id}`}>
-                <div className="anime-card flex flex-col items-center p-6 text-center">
-                  <span className="text-4xl">{category.icon}</span>
-                  <span className="mt-3 text-sm font-medium">{category.name}</span>
+                <div className="anime-card group cursor-pointer overflow-hidden">
+                  <div className="relative aspect-square overflow-hidden">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-3 text-center">
+                      <span className="text-2xl">{category.icon}</span>
+                      <p className="mt-1 text-sm font-medium text-foreground">{category.name}</p>
+                    </div>
+                  </div>
                 </div>
               </Link>
             </motion.div>
